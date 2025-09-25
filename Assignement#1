@@ -1,0 +1,82 @@
+**1. Extensions files**
+file = input("entrez le nom du fichier:")
+filestandard=file.lower().strip()
+print(filestandard)
+#to make a standardisation of the name and avoid errors brought by majuscules or spaces
+if filestandard.endswith(".gif"):
+    print(f"{file} is image/gif")
+elif filestandard.endswith(".jpg") or filestandard.endswith(".jpeg"):
+    print(f"{file} is image/jpeg")
+elif filestandard.endswith(".png"):
+    print(f"{file} is image/png")
+elif filestandard.endswith(".pdf"):
+    print(f"{file} is application/PDF")
+elif filestandard.endswith(".txt"):
+    print(f"{file} is text/plain")
+elif filestandard.endswith(".zip"):
+    print(f"{file} is application/ZIP")
+else :
+    print("format non reconnu")
+
+#amelioration : use dictionaries to put the extension in relation
+#with the type of file and extract the extension from the name to cross it with dictionaries and print the type.
+
+**2. Coke machine**
+#Set the object (integer) money which is equal to 0 at the begining
+money=0
+#loop that repeats itself until user have put 50 or more in the machine
+#asking the type of coin, verifying if its accepted. If it is, added to the object money
+while money<50:
+    coin=int(input("please insert a coin:"))
+    if coin==10 or coin==25 or coin==5:
+        money+=coin
+        print(f"amount due :{50-money}")
+    else:
+        print("only 10, 25 or 5 ct please")
+
+#once money is equal or superior to 50, informing the user of the change he owes by substracting
+#50 from money
+print(f"change owed : {money-50}" )
+
+**3. Plate**
+def main():
+    plate = input("Plate: ")
+    if is_valid(plate):
+        print("Valid")
+    else:
+        print("Invalid")
+
+
+def is_valid(s):
+#Check the lenght of the plate
+  if len(s)<2 or len(s)>6:
+        return(False)
+#Check if the first 2 characters are letters
+  if s[0].isalpha()==False:
+      return(False)
+  if s[1].isalpha()==False:
+      return(False)
+#check if there are only letters and number, no other characters
+  for elem in s:
+      if elem.isalpha()==False and elem.isdigit()==False:
+          return(False)
+#Create the objects needed after to verify the numbers
+  number=False
+  firstnumberindex=0
+#finding the first number in the string and its index
+  for i in range (len(s)):
+      if s[i].isdigit()==True:
+          number=True
+          firstnumberindex=i
+          break
+#if number in the plate, check if the first one isnt "0"
+  if number==True:
+      if s[firstnumberindex]=="0":
+          return(False)
+#And that there is no letters between first  number and the end
+      for i in range((firstnumberindex),(len(s))):
+          if s[i].isalpha()==True:
+              return(False)
+#if none of the rules are broken , then it returns "True"
+  return(True)
+main()
